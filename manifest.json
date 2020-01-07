@@ -1,0 +1,52 @@
+{
+
+  "description": "Add TimeOff counter capabilities to Verse Calendar",
+  "manifest_version": 2,
+  "name": "Verse TimeOff Counter",
+  "version": "0.0.1",
+  "homepage_url": "https://mail.notes.na.collabserv.com/verse",
+
+  "icons": {
+    "512": "icons/icon-512.png"
+  },
+
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://mail.notes.collabservintegration.com/verse*",
+    "https://mail.notes.na.collabserv.com/verse*",
+    "https://mail.notes.ap.collabserv.com/verse*",
+    "https://mail.notes.ce.collabserv.com/verse*",
+    "https://mail.notes.scniris.com/verse*",
+    "https://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
+    "https://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
+  ],
+
+  "background": {
+    "scripts": []
+  },
+
+  "content_scripts": [
+    {
+      "js": ["main.js"],      
+      "matches": [
+        "https://mail.notes.collabservintegration.com/verse*",
+        "https://mail.notes.na.collabserv.com/verse*",
+        "https://mail.notes.ap.collabserv.com/verse*",
+        "https://mail.notes.ce.collabserv.com/verse*",
+        "https://mail.notes.scniris.com/verse*",
+        "https://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
+        "https://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
+      ],
+      "exclude_globs": []
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/icon-512.png",
+    "default_title": "Verse TimeOff Counter",
+    "default_popup": "html/popup.html"
+  }
+}
