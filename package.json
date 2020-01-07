@@ -1,0 +1,24 @@
+{
+  "name": "verse-timeoff-counter",
+  "version": "0.0.1",
+  "description": "Add TimeOff counter capabilities to Verse Calendar ",
+  "main": "main.js",
+  "scripts": {
+    "build": "web-ext build",
+    "lint": "web-ext lint",
+    "sign": "web-ext sign",
+    "docs": "web-ext docs",
+    "start": "web-ext run",
+    "start:firefox": "web-ext run --source-dir ./extension-dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.ibm.com:valerio-riva/verse-timeoff-counter.git"
+  },
+  "author": "Valerio Riva",
+  "license": "ISC",
+  "devDependencies": {
+    "web-ext": "^4.0.0"
+  }
+}

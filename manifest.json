@@ -10,7 +10,6 @@
     "512": "icons/icon-512.png"
   },
 
-
   "permissions": [
     "activeTab",
     "storage",
@@ -47,6 +46,6 @@
   "browser_action": {
     "default_icon": "icons/icon-512.png",
     "default_title": "Verse TimeOff Counter",
-    "default_popup": "html/popup.html"
+    "default_popup": "popup/index.html"
   }
 }
