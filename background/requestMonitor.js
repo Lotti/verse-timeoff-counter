@@ -25,9 +25,11 @@ function sendRefreshMessage(details) {
             ]
         }).then((tabs) => {
             for (const tab of tabs) {
-                setTimeout(() => {
-                    browser.tabs.sendMessage(tab.id, { refresh: true });
-                }, delay ? 500 : 500);
+                if (!block) {
+                    setTimeout(() => {
+                        browser.tabs.sendMessage(tab.id, {refresh: true});
+                    }, delay ? 500 : 500);
+                }
             }
         }).catch((error) => {
             console.error('sendRefreshMessage', error);
