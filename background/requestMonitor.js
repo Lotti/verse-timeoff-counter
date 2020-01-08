@@ -3,12 +3,11 @@ function sendRefreshMessage(details) {
     let delay = false;
 
     // check for event delete in pop-up window
-    if (details.url.includes('.nsf') && !(details.url.includes('OpenDocument') && details.url.includes('s_ReadPartStatus'))) {
-        block = true;
-    }
-    // check for event delete in pop-up window - adding delay
-    if (details.url.includes('.nsf') && details.url.includes('OpenDocument') && details.url.includes('s_ReadPartStatus')) {
+    if (details.url.includes('.nsf')) {
         delay = true;
+        if (!(details.url.includes('OpenDocument') && details.url.includes('s_ReadPartStatus'))) {
+            block = true;
+        }
     }
 
     if (!block) {
