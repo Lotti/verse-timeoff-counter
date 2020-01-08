@@ -9,6 +9,7 @@
     "sign": "web-ext sign",
     "docs": "web-ext docs",
     "start": "web-ext run",
+    "dev": "web-ext run --verbose --firefox=/Applications/Firefox\\ Developer\\ Edition.app/Contents/MacOS/firefox-bin --firefox-profile=dev --keep-profile-changes",
     "start:firefox": "web-ext run --source-dir ./extension-dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

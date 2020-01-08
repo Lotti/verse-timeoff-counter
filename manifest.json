@@ -14,6 +14,7 @@
     "activeTab",
     "storage",
     "tabs",
+    "webRequest",
     "https://mail.notes.collabservintegration.com/verse*",
     "https://mail.notes.na.collabserv.com/verse*",
     "https://mail.notes.ap.collabserv.com/verse*",
@@ -24,12 +25,17 @@
   ],
 
   "background": {
-    "scripts": []
+    "scripts": ["requestMonitor.js"]
   },
 
   "content_scripts": [
     {
-      "js": ["main.js"],      
+      "js": [
+        "libs.js", "main.js"
+      ],
+      "css": [
+        "style.css"
+      ],
       "matches": [
         "https://mail.notes.collabservintegration.com/verse*",
         "https://mail.notes.na.collabserv.com/verse*",
