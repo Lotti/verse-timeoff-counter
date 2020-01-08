@@ -46,11 +46,10 @@ browser.webRequest.onCompleted.addListener(sendRefreshMessage, {
     types: ['xmlhttprequest']
 });
 
-const checkAction = (tabId, changeInfo, tab) => {
+const checkAction = () => {
     browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-        console.log(tabs);
         for (const tab of tabs) {
-            if (tab.url.includes('/verse')) {
+            if (tab.url && tab.url.length > 0 && tab.url.includes('/verse')) {
                 browser.browserAction.enable();
             } else {
                 browser.browserAction.disable();
