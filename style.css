@@ -1,4 +1,9 @@
-#vacations {
-    float: right;
-    width: 100%;
+.ics-scbanner > .navcenter {
+    margin-left: auto;
+    margin-right: unset;
+}
+
+#vacations .red {
+    color: red;
+    font-weight: bold;
 }

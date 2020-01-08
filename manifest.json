@@ -25,16 +25,20 @@
   ],
 
   "background": {
-    "scripts": ["requestMonitor.js"]
+    "scripts": [
+      "background/requestMonitor.js"
+    ]
   },
 
   "content_scripts": [
     {
-      "js": [
-        "libs.js", "main.js"
-      ],
       "css": [
         "style.css"
+      ],
+      "js": [
+        "js/libs/purify.min.js",
+        "js/libs.js",
+        "js/main.js"
       ],
       "matches": [
         "https://mail.notes.collabservintegration.com/verse*",

@@ -1,9 +1,14 @@
 function sendRefreshMessage(details) {
     let block = false;
+    let delay = false;
 
     // check for event delete in pop-up window
     if (details.url.includes('.nsf') && !(details.url.includes('OpenDocument') && details.url.includes('s_ReadPartStatus'))) {
         block = true;
+    }
+    // check for event delete in pop-up window - adding delay
+    if (details.url.includes('.nsf') && details.url.includes('OpenDocument') && details.url.includes('s_ReadPartStatus')) {
+        delay = true;
     }
 
     if (!block) {
@@ -21,7 +26,9 @@ function sendRefreshMessage(details) {
             ]
         }).then((tabs) => {
             for (const tab of tabs) {
-                browser.tabs.sendMessage(tab.id, { refresh: true });
+                setTimeout(() => {
+                    browser.tabs.sendMessage(tab.id, { refresh: true });
+                }, delay ? 500 : 500);
             }
         }).catch((error) => {
             console.error('sendRefreshMessage', error);
@@ -34,6 +41,11 @@ browser.webRequest.onCompleted.addListener(sendRefreshMessage, {
         '*://*/*($Calendar)/$new/*', // calendar url create
         '*://*/*($Calendar)/*EditDocument*', // calendar url edit
         '*://*/*.nsf*', // url to monitor event pop-up window from verse timeline
+        '*://*/*', // url to monitor event pop-up window from verse timeline
     ],
     types: ['xmlhttprequest']
+});
+
+browser.tabs.onCreated.addListener(() => {
+    // browser.browserAction.disable();
 });

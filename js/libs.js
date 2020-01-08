@@ -28,8 +28,8 @@ function calculate(totalVacation, totalWorkReduction, year) {
 			}
 		}
 
-		const leftVacation = totalVacation - countVacation;
-		const leftWorkReduction = totalWorkReduction - countWorkReduction;
+		let leftVacation = totalVacation - countVacation;
+		let leftWorkReduction = totalWorkReduction - countWorkReduction;
 
 		let interval;
 		const updateUI = () => {
@@ -37,6 +37,10 @@ function calculate(totalVacation, totalWorkReduction, year) {
 			if (doms) {
 				console.log('FERIE', countVacation);
 				console.log('PERMESSI', countWorkReduction);
+
+				leftVacation = leftVacation < 0 ? '<span class="red">'+leftVacation+'</span>' : leftVacation;
+				leftWorkReduction = leftWorkReduction < 0 ? '<span class="red">'+leftWorkReduction+'</span>' : leftWorkReduction;
+
 				try {
 					const doms = document.querySelector('.navcenter');
 					const element = document.getElementById("vacations");
@@ -46,7 +50,8 @@ function calculate(totalVacation, totalWorkReduction, year) {
 
 					const d = document.createElement("div");
 					d.setAttribute("id", "vacations");
-					d.innerHTML = '<span id="year">ANNO: ' + year + '</span> <span id="ferie">FERIE: ' + leftVacation + '</span> <span id="permessi">PERMESSI: ' + leftWorkReduction + '</span>';
+					const html = '<span id="year">Year: ' + year + '</span>&nbsp;&nbsp;&nbsp;<span id="ferie">Vacations Left: ' + leftVacation + '</span>&nbsp;&nbsp;&nbsp;<span id="permessi">Work Reduction Left: ' + leftWorkReduction + '</span>';
+					d.innerHTML = DOMPurify.sanitize(html);
 					doms.appendChild(d);
 				} catch (error) {
 					console.error("ERRORE!");
