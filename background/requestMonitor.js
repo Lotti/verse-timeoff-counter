@@ -42,11 +42,22 @@ browser.webRequest.onCompleted.addListener(sendRefreshMessage, {
         '*://*/*($Calendar)/$new/*', // calendar url create
         '*://*/*($Calendar)/*EditDocument*', // calendar url edit
         '*://*/*.nsf*', // url to monitor event pop-up window from verse timeline
-        '*://*/*', // url to monitor event pop-up window from verse timeline
     ],
     types: ['xmlhttprequest']
 });
 
-browser.tabs.onCreated.addListener(() => {
-    // browser.browserAction.disable();
-});
+const checkAction = (tabId, changeInfo, tab) => {
+    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
+        console.log(tabs);
+        for (const tab of tabs) {
+            if (tab.url.includes('/verse')) {
+                browser.browserAction.enable();
+            } else {
+                browser.browserAction.disable();
+            }
+        }
+    });
+};
+
+browser.tabs.onCreated.addListener(checkAction);
+browser.tabs.onUpdated.addListener(checkAction);

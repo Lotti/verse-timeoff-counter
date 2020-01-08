@@ -3,6 +3,10 @@
     margin-right: unset;
 }
 
+#vacations {
+    margin-right: 10px;
+}
+
 #vacations .red {
     color: red;
     font-weight: bold;
