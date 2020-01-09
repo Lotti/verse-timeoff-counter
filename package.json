@@ -2,18 +2,17 @@
   "name": "verse-timeoff-counter",
   "version": "0.0.1",
   "description": "Add TimeOff counter capabilities to Verse Calendar ",
-  "main": "js/main.js",
+  "main": "public/js/main.js",
   "homepage": "./",
   "scripts": {
     "react": "react-scripts start",
     "react:build": "react-scripts build",
     "react:eject": "react-scripts eject",
-    "build": "npm run react:build && web-ext build",
-    "lint": "web-ext lint",
+    "build": "npm run react:build && web-ext build --source-dir=./build",
+    "lint": "web-ext lint --source-dir=./build",
     "sign": "web-ext sign",
-    "docs": "web-ext docs",
-    "start": "web-ext run",
-    "dev": "web-ext run --verbose --firefox=/Applications/Firefox.app/Contents/MacOS/firefox-bin --firefox-profile=dev --keep-profile-changes",
+    "start": "web-ext run --source-dir=./build",
+    "dev": "web-ext run --source-dir=./build --firefox=/Applications/Firefox.app/Contents/MacOS/firefox-bin --firefox-profile=dev --keep-profile-changes",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -32,7 +32,7 @@
     {
       "run_at": "document_idle",
       "css": [
-        "style.css"
+        "css/style.css"
       ],
       "js": [
         "js/libs/purify.min.js",
@@ -60,6 +60,6 @@
       "512": "icons/icon-512.png"
     },
     "default_title": "Verse TimeOff Counter",
-    "default_popup": "build/index.html"
+    "default_popup": "index.html"
   }
 }
