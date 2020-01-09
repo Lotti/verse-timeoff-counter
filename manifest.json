@@ -9,17 +9,18 @@
     "storage",
     "tabs",
     "webRequest",
-    "https://mail.notes.collabservintegration.com/verse*",
-    "https://mail.notes.na.collabserv.com/verse*",
-    "https://mail.notes.ap.collabserv.com/verse*",
-    "https://mail.notes.ce.collabserv.com/verse*",
-    "https://mail.notes.scniris.com/verse*",
-    "https://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
-    "https://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
+    "*://mail.notes.collabservintegration.com/verse*",
+    "*://mail.notes.na.collabserv.com/verse*",
+    "*://mail.notes.ap.collabserv.com/verse*",
+    "*://mail.notes.ce.collabserv.com/verse*",
+    "*://mail.notes.scniris.com/verse*",
+    "*://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
+    "*://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
   ],
   "background": {
     "scripts": [
-      "background/requestMonitor.js"
+      "background/requestMonitor.js",
+      "background/browserAction.js"
     ]
   },
   "content_scripts": [
@@ -34,13 +35,13 @@
         "js/main.js"
       ],
       "matches": [
-        "https://mail.notes.collabservintegration.com/verse*",
-        "https://mail.notes.na.collabserv.com/verse*",
-        "https://mail.notes.ap.collabserv.com/verse*",
-        "https://mail.notes.ce.collabserv.com/verse*",
-        "https://mail.notes.scniris.com/verse*",
-        "https://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
-        "https://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
+        "*://mail.notes.collabservintegration.com/verse*",
+        "*://mail.notes.na.collabserv.com/verse*",
+        "*://mail.notes.ap.collabserv.com/verse*",
+        "*://mail.notes.ce.collabserv.com/verse*",
+        "*://mail.notes.scniris.com/verse*",
+        "*://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
+        "*://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
       ]
     }
   ],
