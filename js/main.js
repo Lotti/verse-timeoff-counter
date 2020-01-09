@@ -2,7 +2,6 @@ document.body.style.border = "5px solid red";
 try {
     // setup listener from background process
     API.runtime.onMessage.addListener((data) => {
-        console.log('ON MESSAGE');
         if (data.refresh) {
             calculate(data.tab);
         }

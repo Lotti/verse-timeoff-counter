@@ -18,6 +18,7 @@ const pathsToMonitor = [
 
 const refreshDelay = 500;
 function sendRefreshMessage() {
+    console.log('sendRefreshMessage message sent');
     API.tabs.query({url: domainsToMonitor.map(d => d+'/verse*')}).then((tabs) => {
         for (const tab of tabs) {
             setTimeout(() => {
