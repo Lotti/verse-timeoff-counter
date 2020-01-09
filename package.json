@@ -8,11 +8,11 @@
     "react": "react-scripts start",
     "react:build": "react-scripts build",
     "react:eject": "react-scripts eject",
-    "build": "npm run react:build && web-ext build --source-dir=./build",
-    "lint": "web-ext lint --source-dir=./build",
-    "sign": "web-ext sign",
-    "start": "web-ext run --source-dir=./build",
-    "dev": "web-ext run --source-dir=./build --firefox=/Applications/Firefox.app/Contents/MacOS/firefox-bin --firefox-profile=dev --keep-profile-changes",
+    "build": "npm run react:build && web-ext build -s=./build --overwrite-dest",
+    "lint": "web-ext lint -s=./build",
+    "sign": "web-ext sign -s=./build",
+    "start": "web-ext run -s=./build",
+    "dev": "web-ext run -s=./build -f=/Applications/Firefox.app/Contents/MacOS/firefox-bin -p=dev --keep-profile-changes",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
