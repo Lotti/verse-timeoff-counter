@@ -30,16 +30,29 @@ function updateUI(year, leftVacation, leftWorkReduction) {
 	}
 }
 
+function manageEntries(entries, vacationRegex, reductionRegex) {
+	let countVacation = 0;
+	let countWorkReduction = 0;
 
+	for (const e of entries) {
+		for (const data of e.entrydata) {
+			const keys = Object.keys(data);
+			if (data["@name"] === "$Subject" && vacationRegex.test(data.text[0])) {
+				countVacation++;
+			} else if (data["@name"] === "$Subject" && reductionRegex.test(data.text[0])) {
+				countWorkReduction+= 8;
+			}
+		}
+	}
 
+	return {countVacation, countWorkReduction};
+}
 
-async function calculate(tabId) {
+function calculate(tabId) {
 	if (!calculating) {
 		calculating = true;
 
 		const year = new Date().getFullYear();
-		let countVacation = 0;
-		let countWorkReduction = 0;
 		let totalVacation = 0;
 		let totalWorkReduction = 0;
 		let vacationRegex = new RegExp('ferie','i');
@@ -59,21 +72,10 @@ async function calculate(tabId) {
 		}).then((json) => {
 			calculating = false;
 
-			for (const e of json.entries.viewentry) {
-				for (const data of e.entrydata) {
-					const keys = Object.keys(data);
-					if (data["@name"] === "$Subject" && vacationRegex.test(data.text[0])) {
-						countVacation++;
-					} else if (data["@name"] === "$Subject" && reductionRegex.test(data.text[0])) {
-						countWorkReduction++;
-					}
-				}
-			}
+			const {countVacation, countWorkReduction} = manageEntries(json.entries.viewentry, vacationRegex, reductionRegex);
 
-			console.log('tabId', tabId, 'FERIE', countVacation);
-			console.log('tabId', tabId, 'PERMESSI', countWorkReduction);
-			console.log('vacationRegex', vacationRegex);
-			console.log('reductionRegex', reductionRegex);
+			console.log('tabId', tabId, 'VACATION COUNT', countVacation);
+			console.log('tabId', tabId, 'WORK REDUCTION COUNT', countWorkReduction);
 
 			const leftVacation = totalVacation - countVacation;
 			const leftWorkReduction = totalWorkReduction - countWorkReduction;
