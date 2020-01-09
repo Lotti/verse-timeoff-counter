@@ -74,8 +74,10 @@ function calculate(tabId) {
 			vacationRegex = data.hasOwnProperty('vacationRegex') ? new RegExp(data.vacationRegex, 'i') : vacationRegex;
 			reductionRegex = data.hasOwnProperty('reductionRegex') ? new RegExp(data.reductionRegex, 'i') : reductionRegex;
 
+			const firstDay = year + '0101T000000';
+			const lastDay = year + '1231T235959';
 			const url = new URL(window.location.href);
-			const path = '/livemail/iNotes/Proxy/?OpenDocument&Form=s_ReadViewEntries_JSON&Count=-1&KeyType=time&StartKey=' + year + '0101T000000%2C00Z&UntilKey=' + year + '1231T235959%2C00Z&PresetFields=FolderName%3B(%24CSAPIs)&xhr=1&sq=1';
+			const path = '/livemail/iNotes/Proxy/?OpenDocument&Form=s_ReadViewEntries_JSON&Count=-1&KeyType=time&StartKey=' + firstDay + '%2C00Z&UntilKey=' + lastDay + '%2C00Z&PresetFields=FolderName%3B(%24CSAPIs)&xhr=1&sq=1';
 			return fetch(url.origin + path);
 		}).then((response) => {
 			return response.json();
@@ -84,8 +86,8 @@ function calculate(tabId) {
 
 			const {countVacation, countWorkReduction} = manageEntries(json.entries.viewentry, vacationRegex, reductionRegex);
 
-			console.log('tabId', tabId, 'VACATION COUNT', countVacation);
-			console.log('tabId', tabId, 'WORK REDUCTION COUNT', countWorkReduction);
+			// console.log('tabId', tabId, 'VACATION COUNT', countVacation);
+			// console.log('tabId', tabId, 'WORK REDUCTION COUNT', countWorkReduction);
 
 			const leftVacation = totalVacation - countVacation;
 			const leftWorkReduction = totalWorkReduction - countWorkReduction;

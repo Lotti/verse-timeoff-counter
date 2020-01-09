@@ -18,7 +18,6 @@ const pathsToMonitor = [
 
 const refreshDelay = 500;
 function sendRefreshMessage() {
-    console.log('sendRefreshMessage message sent');
     API.tabs.query({url: domainsToMonitor.map(d => d+'/verse*')}).then((tabs) => {
         for (const tab of tabs) {
             setTimeout(() => {
@@ -32,7 +31,12 @@ function sendRefreshMessage() {
 
 function manageMonitoredCall(details) {
     // skip refresh if monitored url is reading calendar entries
-    if (details.url.includes('/livemail/iNotes/Proxy/?OpenDocument&Form=s_ReadViewEntries_JSON&Count=-1&KeyType=time&StartKey')) {
+    const year = new Date().getFullYear();
+    const firstDay = year + '0101T000000';
+    const lastDay = year + '1231T235959';
+    const path = '/livemail/iNotes/Proxy/?OpenDocument&Form=s_ReadViewEntries_JSON&Count=-1&KeyType=time&StartKey=' + firstDay + '%2C00Z&UntilKey=' + lastDay + '%2C00Z&PresetFields=FolderName%3B(%24CSAPIs)&xhr=1&sq=1';
+
+    if (details.url.includes(path)) {
         return;
     }
     sendRefreshMessage();
