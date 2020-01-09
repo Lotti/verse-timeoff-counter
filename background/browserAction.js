@@ -1,14 +1,14 @@
 const checkAction = () => {
-    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
+    API.tabs.query({currentWindow: true, active: true}).then((tabs) => {
         for (const tab of tabs) {
             if (tab.url && tab.url.length > 0 && tab.url.includes('/verse')) {
-                browser.browserAction.enable();
+                API.browserAction.enable();
             } else {
-                browser.browserAction.disable();
+                API.browserAction.disable();
             }
         }
     });
 };
 
-browser.tabs.onCreated.addListener(checkAction);
-browser.tabs.onUpdated.addListener(checkAction);
+API.tabs.onCreated.addListener(checkAction);
+API.tabs.onUpdated.addListener(checkAction);

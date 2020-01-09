@@ -1,3 +1,5 @@
+const API = browser || chrome;
+
 const urlsToMonitor = [];
 const domainsToMonitor = [
     "*://mail.notes.collabservintegration.com",
@@ -16,10 +18,10 @@ const pathsToMonitor = [
 
 const refreshDelay = 500;
 function sendRefreshMessage() {
-    browser.tabs.query({url: domainsToMonitor.map(d => d+'/verse*')}).then((tabs) => {
+    API.tabs.query({url: domainsToMonitor.map(d => d+'/verse*')}).then((tabs) => {
         for (const tab of tabs) {
             setTimeout(() => {
-                browser.tabs.sendMessage(tab.id, {refresh: true, tab: tab.id});
+                API.tabs.sendMessage(tab.id, {refresh: true, tab: tab.id});
             }, refreshDelay);
         }
     }).catch((error) => {
@@ -41,4 +43,4 @@ for (const d of domainsToMonitor) {
     }
 }
 
-browser.webRequest.onCompleted.addListener(manageMonitoredCall, {urls: urlsToMonitor, types: ['xmlhttprequest']});
+API.webRequest.onCompleted.addListener(manageMonitoredCall, {urls: urlsToMonitor, types: ['xmlhttprequest']});

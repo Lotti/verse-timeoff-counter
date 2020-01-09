@@ -1,3 +1,5 @@
+const API = browser || chrome;
+
 let calculating = false;
 let interval;
 
@@ -28,25 +30,31 @@ function updateUI(year, leftVacation, leftWorkReduction) {
 	}
 }
 
-function calculate(tabId, totalVacation, totalWorkReduction, year) {
+
+
+
+async function calculate(tabId) {
 	if (!calculating) {
 		calculating = true;
 
+		const year = new Date().getFullYear();
 		let countVacation = 0;
 		let countWorkReduction = 0;
+		let totalVacation = 0;
+		let totalWorkReduction = 0;
+		let vacationRegex = new RegExp('ferie','i');
+		let reductionRegex = new RegExp('permesso','i');
 
-		if (!totalVacation) {
-			totalVacation = 0;
-		}
-		if (!totalWorkReduction) {
-			totalWorkReduction = 0;
-		}
-		if (!year) {
-			year = new Date().getFullYear();
-		}
+		API.storage.sync.get(['vacationDays','workReductionHours','vacationRegex','reductionRegex']).then((data) => {
+			totalVacation = data.hasOwnProperty('vacationDays') ? data.vacationDays : totalVacation;
+			totalWorkReduction = data.hasOwnProperty('workReductionHours') ? data.workReductionHours : totalWorkReduction;
+			vacationRegex = data.hasOwnProperty('vacationRegex') ? new RegExp(data.vacationRegex, 'i') : vacationRegex;
+			reductionRegex = data.hasOwnProperty('reductionRegex') ? new RegExp(data.reductionRegex, 'i') : reductionRegex;
 
-		const url = new URL(window.location.href);
-		fetch(url.origin + '/livemail/iNotes/Proxy/?OpenDocument&Form=s_ReadViewEntries_JSON&Count=-1&KeyType=time&StartKey=' + year + '0101T000000%2C00Z&UntilKey=' + year + '1231T235959%2C00Z&PresetFields=FolderName%3B(%24CSAPIs)&xhr=1&sq=1').then((response) => {
+			const url = new URL(window.location.href);
+			const path = '/livemail/iNotes/Proxy/?OpenDocument&Form=s_ReadViewEntries_JSON&Count=-1&KeyType=time&StartKey=' + year + '0101T000000%2C00Z&UntilKey=' + year + '1231T235959%2C00Z&PresetFields=FolderName%3B(%24CSAPIs)&xhr=1&sq=1';
+			return fetch(url.origin + path);
+		}).then((response) => {
 			return response.json();
 		}).then((json) => {
 			calculating = false;
@@ -54,9 +62,9 @@ function calculate(tabId, totalVacation, totalWorkReduction, year) {
 			for (const e of json.entries.viewentry) {
 				for (const data of e.entrydata) {
 					const keys = Object.keys(data);
-					if (data["@name"] === "$Subject" && data.text[0].includes("FERIE")) {
+					if (data["@name"] === "$Subject" && vacationRegex.test(data.text[0])) {
 						countVacation++;
-					} else if (data["@name"] === "$Subject" && data.text[0].includes("PERMESSO")) {
+					} else if (data["@name"] === "$Subject" && reductionRegex.test(data.text[0])) {
 						countWorkReduction++;
 					}
 				}
@@ -64,6 +72,8 @@ function calculate(tabId, totalVacation, totalWorkReduction, year) {
 
 			console.log('tabId', tabId, 'FERIE', countVacation);
 			console.log('tabId', tabId, 'PERMESSI', countWorkReduction);
+			console.log('vacationRegex', vacationRegex);
+			console.log('reductionRegex', reductionRegex);
 
 			const leftVacation = totalVacation - countVacation;
 			const leftWorkReduction = totalWorkReduction - countWorkReduction;

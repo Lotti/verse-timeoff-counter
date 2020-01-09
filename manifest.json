@@ -1,4 +1,9 @@
 {
+  "applications": {
+    "gecko": {
+      "id": "timeoff-counter@verse.addon"
+    }
+  },
   "description": "Add TimeOff counter capabilities to Verse Calendar",
   "manifest_version": 2,
   "name": "Verse TimeOff Counter",
