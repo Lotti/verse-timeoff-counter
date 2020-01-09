@@ -35,12 +35,22 @@ function manageEntries(entries, vacationRegex, reductionRegex) {
 	let countWorkReduction = 0;
 
 	for (const e of entries) {
-		for (const data of e.entrydata) {
-			const keys = Object.keys(data);
-			if (data["@name"] === "$Subject" && vacationRegex.test(data.text[0])) {
-				countVacation++;
-			} else if (data["@name"] === "$Subject" && reductionRegex.test(data.text[0])) {
-				countWorkReduction+= 8;
+		const entry = new CalendarEntry(e);
+		if (SUPPORTED_TYPES.includes(entry.type)) {
+			if (vacationRegex.test(entry.subject)) {
+				if (entry.durationHours > 4) {
+					countVacation += 1;
+				} else {
+					countVacation += 0.5;
+				}
+			} else if (reductionRegex.test(entry.subject)) {
+				if (entry.durationHours > 8) {
+					countWorkReduction += 8;
+				} else if (entry.durationHours > 4) {
+					countWorkReduction += entry.durationHours - 1;
+				} else {
+					countWorkReduction += entry.durationHours;
+				}
 			}
 		}
 	}

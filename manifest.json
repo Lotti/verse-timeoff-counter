@@ -36,6 +36,7 @@
       ],
       "js": [
         "js/libs/purify.min.js",
+        "js/CalendarEntry.js",
         "js/libs.js",
         "js/main.js"
       ],
