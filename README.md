@@ -32,3 +32,7 @@ Use npm commands:
 - manifest.json is located inside "public" folder
 - web-ext code (icons, css, js content and background files) is located inside "public" folder
 - browser action popup is react app. Its source code is located inside "src" folder
+
+---
+
+Icons made by [monkik](https://www.flaticon.com/authors/monkik) from [www.flaticon.com](https://www.flaticon.com/)</a>
