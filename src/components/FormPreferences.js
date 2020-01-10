@@ -3,7 +3,7 @@
 import React from 'react';
 import {Form, Input, InputNumber, Button} from 'antd';
 
-const API = browser || chrome;
+const API = window || browser || chrome;
 
 class FormPreferences extends React.Component {
     state = {
@@ -13,7 +13,7 @@ class FormPreferences extends React.Component {
         initialVacationDays: 20,
         initialWorkReductionHours: 16*8,
         initialVacationRegex: 'ferie',
-        initialReductionRegex: 'permesso',
+        initialReductionRegex: 'permesso|rol',
     };
 
     componentDidMount() {
@@ -79,23 +79,23 @@ class FormPreferences extends React.Component {
 
         const formItemLayout = {
             labelCol: {
-                xs: { span: 24 },
-                sm: { span: 8 },
+                xs: { span: 12 },
+                sm: { span: 12 },
             },
             wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 16 },
+                xs: { span: 12 },
+                sm: { span: 12 },
             },
         };
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
-                    span: 24,
-                    offset: 0,
+                    span: 2,
+                    offset: 12,
                 },
                 sm: {
-                    span: 24,
-                    offset: 0,
+                    span: 2,
+                    offset: 12,
                 },
             },
         };
@@ -149,8 +149,10 @@ class FormPreferences extends React.Component {
                 <Form.Item {...tailFormItemLayout}>
                     <Button disabled={!dirty} type="primary" htmlType="submit">Save</Button>
                 </Form.Item>
+                <div className="response">
                 {success ? <span className="bold green">Values successfully saved.</span> : null}
                 {error ? <span className="bold red">An error has occurred. {error.message}</span> : null}
+                </div>
             </Form>
         );
     }

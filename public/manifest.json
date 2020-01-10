@@ -24,6 +24,7 @@
   ],
   "background": {
     "scripts": [
+      "background/CalendarEntry.js",
       "background/requestMonitor.js",
       "background/browserAction.js"
     ]
@@ -36,8 +37,6 @@
       ],
       "js": [
         "js/libs/purify.min.js",
-        "js/CalendarEntry.js",
-        "js/libs.js",
         "js/main.js"
       ],
       "matches": [
@@ -61,5 +60,9 @@
     },
     "default_title": "Verse TimeOff Counter",
     "default_popup": "index.html"
+  },
+  "options_ui": {
+    "page": "index.html",
+    "browser_style": false
   }
 }
