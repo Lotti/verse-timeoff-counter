@@ -3,7 +3,7 @@
 import React from 'react';
 import {Form, Input, InputNumber, Button} from 'antd';
 
-const API = window || browser || chrome;
+const API = browser || chrome;
 
 class FormPreferences extends React.Component {
     state = {
