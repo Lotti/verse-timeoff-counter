@@ -3,7 +3,8 @@
 .App {
   margin: 0 auto;
   padding: 20px;
-  height: 400px;
+  height: 550px;
+  width: 100%;
 }
 
 .bold {
@@ -18,6 +19,6 @@
   color: darkred;
 }
 
-h1, .response {
+h1, .center {
   text-align: center;
 }

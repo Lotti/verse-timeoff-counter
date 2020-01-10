@@ -90,12 +90,12 @@ class FormPreferences extends React.Component {
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
-                    span: 2,
-                    offset: 12,
+                    span: 24,
+                    offset: 0,
                 },
                 sm: {
-                    span: 2,
-                    offset: 12,
+                    span: 24,
+                    offset: 0,
                 },
             },
         };
@@ -146,12 +146,12 @@ class FormPreferences extends React.Component {
                         ],
                     })(<Input onChange={this.onChange} />)}
                 </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
+                <Form.Item {...tailFormItemLayout} className="center">
                     <Button disabled={!dirty} type="primary" htmlType="submit">Save</Button>
                 </Form.Item>
-                <div className="response">
-                {success ? <span className="bold green">Values successfully saved.</span> : null}
-                {error ? <span className="bold red">An error has occurred. {error.message}</span> : null}
+                <div className="center">
+                    {success ? <span className="bold green">Values successfully saved.</span> : null}
+                    {error ? <span className="bold red">An error has occurred. {error.message}</span> : null}
                 </div>
             </Form>
         );
