@@ -1,6 +1,6 @@
 {
   "name": "verse-timeoff-counter",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Add TimeOff counter capabilities to Verse Calendar ",
   "main": "public/js/main.js",
   "homepage": "./",
