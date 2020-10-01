@@ -1,4 +1,5 @@
-/*global chrome browser*/
+/*global chrome*/
+/*global browser*/
 
 import React from 'react';
 import {Form, Input, InputNumber, Button} from 'antd';
@@ -31,23 +32,18 @@ class FormPreferences extends React.Component {
         }
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values: ', values);
-                try {
-                    API.storage.sync.set(values).then(() => {
-                        this.setState({success: true});
-                        this.sendRefreshMessage();
-                    }).catch((error) => {
-                        this.setState({error});
-                    });
-                } catch (error) {
-                    this.setState({error});
-                }
-            }
-        });
+    handleSubmit = (values) => {
+        console.log('Received values: ', values);
+        try {
+            API.storage.sync.set(values).then(() => {
+                this.setState({success: true});
+                this.sendRefreshMessage();
+            }).catch((error) => {
+                this.setState({error});
+            });
+        } catch (error) {
+            this.setState({error});
+        }
     };
 
     refreshDelay = 500;
@@ -72,7 +68,6 @@ class FormPreferences extends React.Component {
     };
 
     render() {
-        const { getFieldDecorator } = this.props.form;
         const { dirty, success, error,
             initialVacationDays, initialWorkReductionHours,
             initialVacationRegex, initialReductionRegex } = this.state;
@@ -101,50 +96,30 @@ class FormPreferences extends React.Component {
         };
 
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <Form {...formItemLayout} onFinish={this.handleSubmit}>
                 <Form.Item label="Total Vacation days">
-                    {getFieldDecorator('vacationDays', {
-                        initialValue: initialVacationDays,
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your total Vacation days!',
-                            },
-                        ],
-                    })(<InputNumber min={0} step={0.5} precision={1} onChange={this.onChange} />)}
+                    <Form.Item name="vacationDays" noStyle initialValue={initialVacationDays}
+                               rules={[{required: true, message: 'Please input your total Vacation days!'}]}>
+                        <InputNumber min={0} step={0.5} precision={1} onChange={this.onChange} />
+                    </Form.Item>
                 </Form.Item>
                 <Form.Item label="Total Work Reduction hours">
-                    {getFieldDecorator('workReductionHours', {
-                        initialValue: initialWorkReductionHours,
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your total Work Reduction hours!',
-                            },
-                        ],
-                    })(<InputNumber min={0} step={1} precision={0} onChange={this.onChange} />)}
+                    <Form.Item name="workReductionHours" noStyle initialValue={initialWorkReductionHours}
+                               rules={[{required: true, message: 'Please input your total Work Reduction hours!'}]}>
+                        <InputNumber min={0} step={1} precision={0} onChange={this.onChange} />
+                    </Form.Item>
                 </Form.Item>
                 <Form.Item label="Vacation label">
-                    {getFieldDecorator('vacationRegex', {
-                        initialValue: initialVacationRegex,
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your Vacation label!',
-                            },
-                        ],
-                    })(<Input onChange={this.onChange} />)}
+                    <Form.Item name="vacationRegex" noStyle initialValue={initialVacationRegex}
+                               rules={[{required: true, message: 'Please input your Vacation label!'}]}>
+                        <Input onChange={this.onChange} />
+                    </Form.Item>
                 </Form.Item>
                 <Form.Item label="Work Reduction label">
-                    {getFieldDecorator('reductionRegex', {
-                        initialValue: initialReductionRegex,
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your Work Reduction label!',
-                            },
-                        ],
-                    })(<Input onChange={this.onChange} />)}
+                    <Form.Item name="reductionRegex" noStyle initialValue={initialReductionRegex}
+                               rules={[{required: true, message: 'Please input your Work Reduction label!'}]}>
+                        <Input onChange={this.onChange} />
+                    </Form.Item>
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout} className="center">
                     <Button disabled={!dirty} type="primary" htmlType="submit">Save</Button>
@@ -158,4 +133,4 @@ class FormPreferences extends React.Component {
     }
 }
 
-export default Form.create({ name: 'preferences' })(FormPreferences);
+export default FormPreferences;

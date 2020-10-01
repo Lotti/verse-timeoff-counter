@@ -90,7 +90,7 @@ function calculate() {
         }).then((json) => {
             calculating = false;
 
-            const {countVacation, countWorkReduction} = manageEntries(json.entries.viewentry, vacationRegex, reductionRegex);
+            const {countVacation, countWorkReduction} = manageEntries(json.entries.viewentry, vacationRegex, reductionRegex);
             const leftVacation = totalVacation - countVacation;
             const leftWorkReduction = totalWorkReduction - countWorkReduction;
             // console.log('calculate leftVacation', leftVacation);
