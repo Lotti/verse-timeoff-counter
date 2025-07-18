@@ -20,7 +20,7 @@
   "author": "Valerio Riva",
   "license": "MIT",
   "devDependencies": {
-    "web-ext": "^5.1.0"
+    "web-ext": "^8.9.0"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -29,7 +29,7 @@
     "antd": "^4.6.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "5.0.1"
   },
   "eslintConfig": {
     "extends": "react-app"
