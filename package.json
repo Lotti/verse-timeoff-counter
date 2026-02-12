@@ -20,7 +20,7 @@
   "author": "Valerio Riva",
   "license": "MIT",
   "devDependencies": {
-    "web-ext": "^8.10.0"
+    "web-ext": "^9.3.0"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
