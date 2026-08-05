@@ -1,0 +1,124 @@
+:root {
+  color: #f6efe5;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(240, 177, 121, 0.25), transparent 32%),
+    linear-gradient(160deg, #1f2937 0%, #111827 54%, #0f172a 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.shell {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.panel {
+  margin: 0 auto;
+  max-width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.84);
+  box-shadow: 0 18px 55px rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f7c873;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  line-height: 1.05;
+}
+
+.lede {
+  margin: 12px 0 24px;
+  color: rgba(246, 239, 229, 0.78);
+  line-height: 1.5;
+}
+
+.settings-form {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field span {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+.field input {
+  border: 1px solid rgba(247, 200, 115, 0.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #f8fafc;
+  background: rgba(30, 41, 59, 0.96);
+}
+
+.field input:focus {
+  outline: 2px solid rgba(247, 200, 115, 0.5);
+  outline-offset: 2px;
+}
+
+.actions {
+  padding-top: 8px;
+}
+
+.actions button {
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 18px;
+  font-weight: 700;
+  color: #111827;
+  background: linear-gradient(135deg, #f7c873, #f3a663);
+  cursor: pointer;
+}
+
+.actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.status {
+  margin: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  line-height: 1.45;
+}
+
+.status-success {
+  color: #d1fae5;
+  background: rgba(22, 163, 74, 0.2);
+}
+
+.status-error {
+  color: #fecaca;
+  background: rgba(220, 38, 38, 0.2);
+}

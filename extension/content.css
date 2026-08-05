@@ -1,0 +1,16 @@
+.ics-scbanner > .navcenter {
+  margin-left: auto;
+  margin-right: unset;
+}
+
+#vacations {
+  display: flex;
+  gap: 14px;
+  margin-right: 10px;
+  align-items: center;
+}
+
+#vacations .metric-negative {
+  color: #d11a2a;
+  font-weight: 700;
+}

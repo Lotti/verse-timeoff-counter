@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Verse TimeOff Counter",
+  "description": "Add TimeOff counter capabilities to Verse Calendar",
+  "version": "1.0.0",
+  "homepage_url": "https://github.ibm.com/valerio-riva/verse-timeoff-counter",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "timeoff-counter@verse.addon"
+    }
+  },
+  "permissions": ["storage", "tabs", "webRequest"],
+  "host_permissions": [
+    "*://mail.notes.collabservintegration.com/*",
+    "*://mail.notes.na.collabserv.com/*",
+    "*://mail.notes.ap.collabserv.com/*",
+    "*://mail.notes.ce.collabserv.com/*",
+    "*://mail.notes.scniris.com/*",
+    "*://mail.notes.collabservsvt2.swg.usma.ibm.com/*",
+    "*://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.notes.collabservintegration.com/verse*",
+        "*://mail.notes.na.collabserv.com/verse*",
+        "*://mail.notes.ap.collabserv.com/verse*",
+        "*://mail.notes.ce.collabserv.com/verse*",
+        "*://mail.notes.scniris.com/verse*",
+        "*://mail.notes.collabservsvt2.swg.usma.ibm.com/verse*",
+        "*://llc1mail.notes.collabservsvt1.swg.usma.ibm.com/verse*"
+      ],
+      "run_at": "document_idle",
+      "css": ["content.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "512": "icons/icon-512.png"
+  },
+  "action": {
+    "default_icon": {
+      "512": "icons/icon-512.png"
+    },
+    "default_title": "Verse TimeOff Counter",
+    "default_popup": "index.html"
+  },
+  "options_ui": {
+    "page": "index.html",
+    "open_in_tab": true
+  }
+}
